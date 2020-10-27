@@ -1,15 +1,21 @@
 import os
+import datetime
 import pymysql
 
 username = os.getenv('USER')
 
-connection = pymysql.connect(host='localhost', user=username, password='', db='Chinook')
+# Connect to the database
+connection = pymysql.connect(host='localhost',
+                            user=username,
+                            password='',
+                            db='Chinook')
 
 try:
+    # Run a query
     with connection.cursor() as cursor:
-        sql= "SELECT * FROM Artist;"
-        cursor.execute(sql)
-        result = cursor.fetchall()
-        print(result)
+        rows = ("Bob", 21, "1990-02-06 23:04:56")
+        cursor.execute("INSERT INTO Friends VALUES(%s, %s, %s);", row)
+        connection.commit()
+
 finally:
     connection.close()
